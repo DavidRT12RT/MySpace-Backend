@@ -23,3 +23,15 @@ export const LoginApp = async(req:Request,res:Response) => {
 
     return res.status(200).json({msg:"Sucessfully login",token,user});
 }
+
+
+export const revalidateToken = async(req:Request,res:Response) => {
+
+    //@ts-ignore
+    const user = req.user;
+
+    //Generate new JWT and return 
+    const token = await generarJWT(user.id,user.name);
+
+    return res.status(200).json({user,token});
+}

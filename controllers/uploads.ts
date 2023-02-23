@@ -12,7 +12,6 @@ import uploadFile from "../helpers/uploadFile";
 export const getUserFilesPath = async(req:Request,res:Response) => {
 
     try {
-
         //@ts-ignore
         const id = req.id; //Get id from JWT of user
         checkUserDirectory(id);
@@ -44,7 +43,6 @@ export const getUserFilesPath = async(req:Request,res:Response) => {
 export const uploadUserFile = async(req:Request,res:Response) => {
 
     try {
-
         //@ts-ignore
         const id = req.id; //Get id from JWT of user
 
@@ -59,7 +57,9 @@ export const uploadUserFile = async(req:Request,res:Response) => {
         if(dirPath.existsPath === false) return res.status(400).json({msg:"Directory not exists to upload file"});
 
         for(const file in req.files) await uploadFile({file:req.files[file]},undefined,dirPath.absolutePath,true,false,false);
-        return res.status(200).json({msg:"File upload successfully!",path:dirPath.relativePath});       
+
+        const filesUploaded = Object.keys(req.files).length;
+        return res.status(200).json({msg:`${ filesUploaded > 1 ? "Files" : "File"} upload successfully!`,path:dirPath.relativePath});       
 
     } catch (error) {
         return res.status(500).json({msg:"Error uploading file to server"});
@@ -96,7 +96,6 @@ export const createUserDirectory = async(req:Request,res:Response) => {
 export const downloadUserFile = async(req:Request,res:Response) => {
 
     try {
-
         //@ts-ignore
         const id = req.id;
         checkUserDirectory(id);

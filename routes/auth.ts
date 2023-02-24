@@ -11,6 +11,6 @@ const router = Router();
 
 router.post("/login",LoginApp);
 
-router.get("/renew",validarJWT,revalidateToken);
+router.post("/renew",validarJWT,revalidateToken);
 
 export default router;

@@ -28,8 +28,8 @@ class Server{
         },
         
         //Metodos iniciales
-        this.middlewares(); 
         this.dbConnection();
+        this.middlewares(); 
         this.routes(); 
     }
 
@@ -43,9 +43,13 @@ class Server{
         this.app.use(this.apiPaths.usuarios,userRoutes);
         this.app.use(this.apiPaths.auth,authRoutes);
         this.app.use(this.apiPaths.uploads,uploadsRoutes);
+
+        //Haciendo que cualquier ruta que llegue sirva el directorio publico donde esta la appa de react de una vez
+        this.app.use("*",express.static("public"));
     }
 
     middlewares(){
+
         //Middlewares son funciones que se ejecutan antes que otros procedimientos
         this.app.use(cors()); //CORS(CROSS DOMAIN POR DEFECTO)
         this.app.use(express.json()); //Parseo del body(Entender objectos JSON que vienen en el body)
@@ -57,8 +61,6 @@ class Server{
         }));//FileUpload
         this.app.use(express.static("public")); //Carpeta publica contenido estatico
 
-        //Haciendo que cualquier ruta que llegue sirva el directorio publico donde esta la appa de react de una vez
-        this.app.use("*",express.static("public"));
     }
 
     async dbConnection(){

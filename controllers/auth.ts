@@ -37,7 +37,7 @@ export const revalidateToken = async(req:Request,res:Response) => {
         return res.status(200).json({user,token});
         
     } catch (error) {
-        return res.status(500).json("Token not validate");
+        return res.status(500).json({msg:"Token not validate"});
     }
 
 }

@@ -51,6 +51,7 @@ const processPath_1 = require("../helpers/processPath");
 const uploadFile_1 = __importDefault(require("../helpers/uploadFile"));
 const getUserFilesPath = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, e_1, _b, _c;
+    console.log("Peticion!");
     try {
         //@ts-ignore
         const id = req.id; //Get id from JWT of user

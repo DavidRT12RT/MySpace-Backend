@@ -30,11 +30,16 @@ const LoginApp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.LoginApp = LoginApp;
 const revalidateToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //@ts-ignore
-    const user = req.user;
-    //Generate new JWT and return 
-    const token = yield (0, generarJWT_1.generarJWT)(user.id, user.name);
-    return res.status(200).json({ user, token });
+    try {
+        //@ts-ignore
+        const user = req.user;
+        //Generate new JWT and return 
+        const token = yield (0, generarJWT_1.generarJWT)(user.id, user.name);
+        return res.status(200).json({ user, token });
+    }
+    catch (error) {
+        return res.status(500).json({ msg: "Token not validate" });
+    }
 });
 exports.revalidateToken = revalidateToken;
 //# sourceMappingURL=auth.js.map

@@ -10,6 +10,6 @@ const validarJWT_1 = __importDefault(require("../middlewares/validarJWT"));
 const auth_1 = require("../controllers/auth");
 const router = (0, express_1.Router)();
 router.post("/login", auth_1.LoginApp);
-router.get("/renew", validarJWT_1.default, auth_1.revalidateToken);
+router.post("/renew", validarJWT_1.default, auth_1.revalidateToken);
 exports.default = router;
 //# sourceMappingURL=auth.js.map

@@ -56,6 +56,9 @@ class Server{
             createParentPath:true
         }));//FileUpload
         this.app.use(express.static("public")); //Carpeta publica contenido estatico
+
+        //Haciendo que cualquier ruta que llegue sirva el directorio publico donde esta la appa de react de una vez
+        this.app.use("*",express.static("public"));
     }
 
     async dbConnection(){

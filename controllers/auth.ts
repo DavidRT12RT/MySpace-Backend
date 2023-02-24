@@ -27,11 +27,17 @@ export const LoginApp = async(req:Request,res:Response) => {
 
 export const revalidateToken = async(req:Request,res:Response) => {
 
-    //@ts-ignore
-    const user = req.user;
+    try {
+        //@ts-ignore
+        const user = req.user;
 
-    //Generate new JWT and return 
-    const token = await generarJWT(user.id,user.name);
+        //Generate new JWT and return 
+        const token = await generarJWT(user.id,user.name);
 
-    return res.status(200).json({user,token});
+        return res.status(200).json({user,token});
+        
+    } catch (error) {
+        return res.status(500).json("Token not validate");
+    }
+
 }
